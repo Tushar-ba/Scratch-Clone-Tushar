@@ -1,8 +1,9 @@
-# React + Vite
+Scratch Clone 
+- Drag and drop Motions/Looks  to the  Action  workspace.
+- Click on Motions/Looks to preview them.
+- Click on the X  to remove the actions/Looks.
+- Make Sure to Run the current action before replaying if you have done any changes or else it will run the previous iteration which you had run and the updated block will not be replayed.
+- Use the buttons to run, replay, or clear actions.
+- Make Sure you use a mouse for drag and drop actions.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- live link https://scratch-clone-tushar.vercel.app/
