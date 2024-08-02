@@ -4,5 +4,6 @@ Scratch Clone
 - Click on the X  to remove the actions/Looks.
 - Make Sure to Run the current action before replaying if you have done any changes or else it will run the previous iteration which you had run and the updated block will not be replayed.
 - Use the buttons to run, replay, or clear actions.
+- Make Sure you use a mouse for drag and drop actions.
 
 - live link https://scratch-clone-tushar.vercel.app/
