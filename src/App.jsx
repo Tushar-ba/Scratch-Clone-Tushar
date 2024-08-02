@@ -1,9 +1,15 @@
-function App() {
-  const [count, setCount] = useState(0)
+import DraggableBlock from "./components/DraggableBlock"
+import Editor from "./components/Editor"
+import Block from "./components/Block"
 
+
+
+function App() {
   return (
     <>
-    Hello
+    <Block/>
+    <DraggableBlock/>
+    <Editor/>
     </>
   )
 }
