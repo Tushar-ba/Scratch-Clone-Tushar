@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { useDrop, DndProvider } from 'react-dnd';
+import { useDrop } from 'react-dnd';
+import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 import Block from './Block';
 import DraggableBlock from './DraggableBlock';
 import FloatingMenu from './FloatingMenu';
@@ -13,16 +15,16 @@ const Editor = () => {
   const [visible, setVisible] = useState(true);
   const [color, setColor] = useState('bg-blue-500');
   const [actions, setActions] = useState([]);
-  const [executedActions, setExecutedActions] = useState([]); // Store actions that have been executed
+  const [executedActions, setExecutedActions] = useState([]);
   const [helloPosition, setHelloPosition] = useState(null);
   const [replaying, setReplaying] = useState(false);
   const [previewAction, setPreviewAction] = useState(null);
-  const [showInstructions, setShowInstructions] = useState(true); // State to control instruction menu
+  const [showInstructions, setShowInstructions] = useState(true);
 
   const [{ isOver }, drop] = useDrop(() => ({
     accept: ['motion', 'looks'],
     drop: (item) => {
-      if (!replaying) { // Only allow adding blocks when not replaying
+      if (!replaying) {
         setActions((prevActions) => [...prevActions, item.label]);
       }
     },
@@ -93,13 +95,11 @@ const Editor = () => {
     const editor = document.querySelector('.editor-container');
     return editor ? editor.offsetWidth : 0;
   };
-  
+
   const getContainerHeight = () => {
     const editor = document.querySelector('.editor-container');
     return editor ? editor.offsetHeight : 0;
   };
-  
-  
 
   const handleBlockClick = (action) => {
     setPreviewAction(action);
@@ -108,7 +108,7 @@ const Editor = () => {
   };
 
   const moveBlock = (fromIndex, toIndex) => {
-    if (!replaying) { // Allow block movement only if not replaying
+    if (!replaying) {
       const updatedActions = [...actions];
       const [movedBlock] = updatedActions.splice(fromIndex, 1);
       updatedActions.splice(toIndex, 0, movedBlock);
@@ -117,7 +117,7 @@ const Editor = () => {
   };
 
   const deleteBlock = (index) => {
-    if (!replaying) { // Allow block deletion only if not replaying
+    if (!replaying) {
       const updatedActions = actions.filter((_, i) => i !== index);
       setActions(updatedActions);
     }
@@ -129,10 +129,10 @@ const Editor = () => {
       return;
     }
 
-    setExecutedActions([...actions]); // Store actions to be executed
+    setExecutedActions([...actions]);
     setReplaying(true);
     let index = 0;
-    const actionSequence = [...actions]; // Use the current actions
+    const actionSequence = [...actions];
 
     setPosition({ x: 150, y: 150 });
     setHelloPosition(null);
@@ -160,7 +160,7 @@ const Editor = () => {
 
     setReplaying(true);
     let index = 0;
-    const actionSequence = [...executedActions]; // Use only executed actions
+    const actionSequence = [...executedActions];
 
     setPosition({ x: 150, y: 150 });
     setHelloPosition(null);
@@ -182,7 +182,7 @@ const Editor = () => {
 
   const clearAllActions = () => {
     setActions([]);
-    setExecutedActions([]); // Clear executed actions as well
+    setExecutedActions([]);
     setPosition({ x: 150, y: 150 });
     setHelloPosition(null);
     setVisible(true);
@@ -194,7 +194,7 @@ const Editor = () => {
     const editor = document.querySelector('.editor-container');
     const editorWidth = getContainerWidth();
     const editorHeight = getContainerHeight();
-  
+
     if (newPosition.x + 40 > editorWidth) {
       editor.style.width = `${editorWidth + 40}px`;
     }
@@ -202,10 +202,9 @@ const Editor = () => {
       editor.style.height = `${editorHeight + 40}px`;
     }
   };
-  
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider backend={window.ontouchstart !== undefined ? TouchBackend : HTML5Backend}>
       <div className="p-4">
         {showInstructions ? (
           <FloatingMenu onClose={() => setShowInstructions(false)} />
@@ -223,7 +222,7 @@ const Editor = () => {
                 ))}
               </div>
               <div className="w-2/3 p-4 editor-container" ref={drop}>
-                <h3 className="text-xl font-bold">Drag your Actions Here </h3>
+                <h3 className="text-xl font-bold">Drag your Actions Here</h3>
                 {actions.map((action, index) => (
                   <DraggableBlock
                     key={index}
