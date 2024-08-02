@@ -12,7 +12,7 @@ const FloatingMenu = ({ onClose }) => {
           <li>Click on the X  to remove the actions/Looks.</li>
           <li>Make Sure to Run the current action before replaying if you have done any changes or else it will run the previous iteration which you had run and the updated block will not be replayed.</li>
           <li>Use the buttons to run, replay, or clear actions.</li>
-          <li>Feel free to rearrange the blocks in the action area itself if you wanna change the sequence and make sure to run it after sequnce chnging before replaying the actions.</li>
+          <li>Feel free to rearrange the blocks in the action area itself if you wanna change the sequence and make sure to run it after sequence changing before replaying the actions.</li>
         </ul>
         <button
           onClick={onClose}
