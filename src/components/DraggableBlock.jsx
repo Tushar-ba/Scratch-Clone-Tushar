@@ -1,27 +1,32 @@
-import React from "react";
-import { useDrag, useDrop } from "react-dnd";
+
+import React from 'react';
+import { useDrag, useDrop } from 'react-dnd';
 
 const DraggableBlock = ({ label, index, moveBlock, deleteBlock }) => {
-  const [, ref] = useDrag({
-    type: "block",
+  const [, drag] = useDrag({
+    type: 'block',
     item: { index },
   });
+
   const [, drop] = useDrop({
-    accept: "block",
+    accept: 'block',
     hover: (item) => {
-      if (item.inedex != index) {
+      if (item.index !== index) {
         moveBlock(item.index, index);
         item.index = index;
       }
     },
   });
+
   return (
     <div
-      ref={(node) => ref(drop(node))}
-      className="p-2 border bg-gray-100 flex justify-between items-center"
+      ref={(node) => drag(drop(node))}
+      className="bg-gray-200 p-2 m-2 rounded cursor-move"
     >
-      <span>{label}</span>
-      <button onClick={() => deleteBlock(index)}>Delete</button>
+      {label}
+      <button className="ml-2 text-red-500" onClick={() => deleteBlock(index)}>
+        X
+      </button>
     </div>
   );
 };

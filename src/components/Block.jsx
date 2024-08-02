@@ -1,20 +1,19 @@
-import React from "react";
-import { useDrag } from "react-dnd";
+// src/components/Block.jsx
+
+import React from 'react';
+import { useDrag } from 'react-dnd';
 
 const Block = ({ label, type, onClick }) => {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type,
+  const [, drag] = useDrag({
+    type: type,
     item: { label },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  }));
+  });
 
   return (
     <div
       ref={drag}
-      className={`p-2 border ${isDragging ? "bg-gray-300" : "bg-gray-100"}`}
       onClick={() => onClick(label)}
+      className="p-4 mb-2 bg-gray-300 border rounded cursor-pointer"
     >
       {label}
     </div>

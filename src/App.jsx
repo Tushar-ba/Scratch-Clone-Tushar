@@ -1,17 +1,17 @@
-import DraggableBlock from "./components/DraggableBlock"
-import Editor from "./components/Editor"
-import Block from "./components/Block"
 
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import Editor from './components/Editor';
+import './index.css'; 
 
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-function App() {
-  return (
-    <>
-    <Block/>
-    <DraggableBlock/>
-    <Editor/>
-    </>
-  )
-}
+root.render(
+  <DndProvider backend={HTML5Backend}>
+    <Editor />
+  </DndProvider>
+);
 
-export default App
+export default App;
